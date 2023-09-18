@@ -6,7 +6,7 @@ namespace CloudWeather.Precipitation.Controllers;
 [Route("api/[controller]")]
 public class PrecipitationController : ControllerBase
 {
-    [HttpGet("/observation/{zip:string}")]
+    [HttpGet("/observation/{zip}")]
     public async Task<IActionResult> GetByZip([FromBody] string zip)
     {
         return await Task.FromResult(Ok(zip));
