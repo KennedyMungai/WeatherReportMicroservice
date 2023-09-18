@@ -21,4 +21,23 @@ public class PrecipitationService : IPrecipitationService
 
         return await Task.FromResult(results);
     }
+
+    public async Task<bool> RecordPrecipitation(PrecipitationModel model)
+    {
+        model.CreatedOn = model.CreatedOn.ToUniversalTime();
+
+        try
+        {
+            await _context.Precipitations.AddAsync(model);
+            await _context.SaveChangesAsync();
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+            throw;
+        }
+    }
 }
