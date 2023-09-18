@@ -6,6 +6,7 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: Password1!
+            MYSQL_DATABASE: PrecipitationDb
         ports:
             - 3310:3306
     TemperatureDb:
@@ -13,6 +14,7 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: Password1!
+            MYSQL_DATABASE: TemperatureDb
         ports:
             - '3311:3306'
     WeatherReportDb:
@@ -20,3 +22,4 @@ services:
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: Password1!
+            MYSQL_DATABASE: WeatherReportDb
