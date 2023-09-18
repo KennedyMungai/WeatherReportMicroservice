@@ -6,5 +6,5 @@ namespace CloudWeather.Precipitation.Services.PrecipitationServices;
 public interface IPrecipitationService
 {
     Task<IEnumerable<PrecipitationModel>> GetByZip(string zip, int? days);
-    Task RecordPrecipitation(PrecipitationModel model);
+    Task<bool> RecordPrecipitation(PrecipitationModel model);
 }
