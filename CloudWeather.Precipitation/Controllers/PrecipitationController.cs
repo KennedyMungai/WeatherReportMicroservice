@@ -11,7 +11,7 @@ public class PrecipitationController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> GetByZip([FromBody] string zip, [FromQuery] int? days)
     {
-        if (days is null || days > 30 || days < 0)
+        if (days is null || days > 30 || days < 1)
         {
             return await Task.FromResult(BadRequest("Please enter the value for days and it should be less than 30"));
         }
