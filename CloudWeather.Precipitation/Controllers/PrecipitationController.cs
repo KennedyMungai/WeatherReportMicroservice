@@ -1,3 +1,4 @@
+using CloudWeather.Precipitation.DataAccess;
 using CloudWeather.Precipitation.Services.PrecipitationServices;
 using Microsoft.AspNetCore.Mvc;
 
@@ -32,5 +33,19 @@ public class PrecipitationController : ControllerBase
         var results = _precipService.GetByZip(zip, days);
 
         return await Task.FromResult(Ok(results));
+    }
+
+
+    [HttpPost]
+    public async Task<IActionResult> RecordPrecipitation([FromBody] PrecipitationModel precip)
+    {
+        var result = await _precipService.RecordPrecipitation(precip);
+
+        if (result is false)
+        {
+            return BadRequest("Something went wrong");
+        }
+
+        return await Task.FromResult(Ok());
     }
 }
