@@ -37,6 +37,8 @@ public class PrecipitationController : ControllerBase
 
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RecordPrecipitation([FromBody] PrecipitationModel precip)
     {
         var result = await _precipService.RecordPrecipitation(precip);
