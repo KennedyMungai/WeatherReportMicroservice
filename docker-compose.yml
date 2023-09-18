@@ -24,4 +24,4 @@ services:
             MYSQL_ROOT_PASSWORD: Password1!
             MYSQL_DATABASE: WeatherReportDb
         ports:
-          - '3312:3306'
+            - '3312:3306'
