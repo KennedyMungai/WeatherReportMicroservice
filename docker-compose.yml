@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+    PrecipitationDb:
+        image: mysql
+        environment:
+            - MYSQL_DATABASE = PrecipitationDb
+            - MYSQL_ROOT_PASSWORD = Password1!
+        ports:
+            - '3310:3306'
+    TemperatureDb:
+        image: mysql
+        environment:
+          - MYSQL_DATABASE = TemperatureDb
+          - MYSQL_ROOT_PASSWORD = Password1!
+        ports:
+          - '3311:3306'
+    WeatherReportDb:
+      image: mysql
+      environment:
+        - MYSQL_DATABASE = WeatherReportDb
+        - MYSQL_ROOT_PASSWORD = Password1!
