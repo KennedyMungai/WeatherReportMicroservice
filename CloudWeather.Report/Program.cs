@@ -13,7 +13,7 @@ builder.Services.AddDbContext<ReportDbContext>(options =>
 {
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnString"),
-        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("ReportDb"))
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnString"))
     );
 });
 
