@@ -8,4 +8,6 @@ public class PrecipDbContext : DbContext
     {
 
     }
+
+    public DbSet<Precipitation> Precipitations { get; set; }
 }
