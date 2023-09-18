@@ -11,7 +11,10 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<PrecipDbContext>(options =>
 {
-    options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnString"));
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnString"),
+        ServerVersion.Parse("8.0.23-mysql")
+    );
 });
 
 var app = builder.Build();
