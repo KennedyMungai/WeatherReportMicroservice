@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<TempDbContext>(options =>
 {
     options.UseMySql(
-        builder.Configuration.GetConnectionString("TempConnString"),
+        builder.Configuration.GetConnectionString("DefaultConnString"),
         ServerVersion.Parse("8.0.23-mysql")
 
     );
