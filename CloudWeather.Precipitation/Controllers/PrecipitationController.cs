@@ -1,3 +1,4 @@
+using CloudWeather.Precipitation.Services.PrecipitationServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CloudWeather.Precipitation.Controllers;
@@ -6,6 +7,13 @@ namespace CloudWeather.Precipitation.Controllers;
 [Route("api/[controller]")]
 public class PrecipitationController : ControllerBase
 {
+    private readonly IPrecipitationService _precipService;
+
+    public PrecipitationController(IPrecipitationService precipService)
+    {
+        _precipService = precipService;
+    }
+
     [HttpGet("/observation/{zip}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -21,6 +29,8 @@ public class PrecipitationController : ControllerBase
             return await Task.FromResult(BadRequest("The zip code has not been entered"));
         }
 
-        return await Task.FromResult(Ok(zip));
+        var results = _precipService.GetByZip(zip, days);
+
+        return await Task.FromResult(Ok(results));
     }
 }
