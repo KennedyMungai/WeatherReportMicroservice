@@ -9,6 +9,6 @@ public class PrecipitationController : ControllerBase
     [HttpGet("/observation/{zip:string}")]
     public async Task<IActionResult> GetByZip([FromBody] string zip)
     {
-        return async Task.FromResult(Ok(zip));
+        return await Task.FromResult(Ok(zip));
     }
 }
