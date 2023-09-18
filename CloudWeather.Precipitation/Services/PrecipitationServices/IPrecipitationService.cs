@@ -1,7 +1,9 @@
+using CloudWeather.Precipitation.DataAccess;
+
 namespace CloudWeather.Precipitation.Services.PrecipitationServices;
 
 
 public interface IPrecipitationService
 {
-    Task GetByZip(string zip, int? days);
+    Task<IEnumerable<PrecipitationModel>> GetByZip(string zip, int? days);
 }
