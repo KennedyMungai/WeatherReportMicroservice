@@ -1,4 +1,3 @@
-
 using CloudWeather.Precipitation.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +17,7 @@ public class PrecipitationService : IPrecipitationService
     {
         var startDate = DateTime.UtcNow - TimeSpan.FromDays(days!.Value);
         List<PrecipitationModel> results = await _context.Precipitations
-                                                        .Where(precip => precip.ZipCode == zip).ToListAsync();
+                                                        .Where(precip => precip.ZipCode == zip && precip.CreatedOn > startDate).ToListAsync();
 
         return await Task.FromResult(results);
     }
