@@ -5,18 +5,18 @@ services:
         image: mysql
         restart: always
         environment:
-            - MYSQL_ROOT_PASSWORD = Password1!
+            MYSQL_ROOT_PASSWORD: Password1!
         ports:
             - 3310:3306
     TemperatureDb:
         image: mysql
         restart: always
         environment:
-          - MYSQL_ROOT_PASSWORD = Password1!
+            MYSQL_ROOT_PASSWORD: Password1!
         ports:
-          - '3311:3306'
+            - '3311:3306'
     WeatherReportDb:
-      image: mysql
-      restart: always
-      environment:
-        - MYSQL_ROOT_PASSWORD = Password1!
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: Password1!
