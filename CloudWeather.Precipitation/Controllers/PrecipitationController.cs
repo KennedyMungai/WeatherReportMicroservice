@@ -9,7 +9,7 @@ public class PrecipitationController : ControllerBase
     [HttpGet("/observation/{zip}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> GetByZip([FromBody] string zip)
+    public async Task<IActionResult> GetByZip([FromBody] string zip, [FromQuery] int? days)
     {
         if (zip is null)
         {
