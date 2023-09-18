@@ -1,7 +1,7 @@
 namespace CloudWeather.Precipitation.DataAccess;
 
 
-public class Precipitation
+public class PrecipitationModel
 {
     public Guid Id { get; set; }
     public DateTime CreatedOn { get; set; }

@@ -9,7 +9,7 @@ public class PrecipDbContext : DbContext
 
     }
 
-    public DbSet<Precipitation> Precipitations { get; set; }
+    public DbSet<PrecipitationModel> Precipitations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,7 +19,7 @@ public class PrecipDbContext : DbContext
 
     public static void SnakeCaseIdentityTableNames(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Precipitation>(b =>
+        modelBuilder.Entity<PrecipitationModel>(b =>
         {
             b.ToTable("precipitation");
         });
