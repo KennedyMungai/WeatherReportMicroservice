@@ -8,7 +8,7 @@ services:
             MYSQL_ROOT_PASSWORD: Password1!
             MYSQL_DATABASE: PrecipitationDb
         ports:
-            - 3310:3306
+            - '3310:3306'
     TemperatureDb:
         image: mysql
         restart: always
@@ -23,3 +23,5 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: Password1!
             MYSQL_DATABASE: WeatherReportDb
+        ports:
+          - '3312:3306'
