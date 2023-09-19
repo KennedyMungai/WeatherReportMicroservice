@@ -1,6 +1,6 @@
 using CloudWeather.Report.Config;
 using CloudWeather.Report.DataAccess;
-using CloudWeather.Temperature.DataAccess;
+using CloudWeather.Report.Models;
 using Microsoft.Extensions.Options;
 
 namespace CloudWeather.Report.BusinessLogic;
