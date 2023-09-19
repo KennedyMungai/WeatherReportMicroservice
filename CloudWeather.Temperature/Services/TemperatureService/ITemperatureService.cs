@@ -1,7 +1,9 @@
+using CloudWeather.Temperature.DataAccess;
+
 namespace CloudWeather.Temperature.Services.TemperatureService;
 
 
 public interface ITemperatureService
 {
-    Task GetTemperatureData(string zip, int? days);
+    Task<IEnumerable<TemperatureModel>> GetTemperatureData(string zip, int? days);
 }
