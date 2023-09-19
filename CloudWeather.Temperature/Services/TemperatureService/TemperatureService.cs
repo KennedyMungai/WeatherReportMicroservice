@@ -30,4 +30,22 @@ public class TemperatureService : ITemperatureService
             throw;
         }
     }
+
+    public async Task<bool> WriteTemperatureData(TemperatureModel temperature)
+    {
+        temperature.CreatedOn = temperature.CreatedOn.ToUniversalTime();
+
+        try
+        {
+            await _context.TemperatureTable.AddAsync(temperature);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            return false;
+            throw;
+        }
+    }
 }
