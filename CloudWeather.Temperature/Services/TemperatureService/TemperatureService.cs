@@ -20,7 +20,7 @@ public class TemperatureService : ITemperatureService
         {
             var startDate = DateTime.UtcNow - TimeSpan.FromDays(days.Value);
             var results = await _context.TemperatureTable
-                                    .Where(temp => temp.ZipCode == zip)
+                                    .Where(temp => temp.ZipCode == zip && temp.CreatedOn > startDate)
                                     .ToListAsync();
             return results;
         }
