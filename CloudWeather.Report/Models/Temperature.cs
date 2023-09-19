@@ -1,5 +1,4 @@
-namespace CloudWeather.Temperature.DataAccess;
-
+namespace CloudWeather.Report.Models;
 
 public class TemperatureModel
 {
