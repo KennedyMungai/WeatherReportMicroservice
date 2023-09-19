@@ -1,3 +1,4 @@
+using CloudWeather.Report.Config;
 using CloudWeather.Report.DataAccess;
 using Microsoft.Extensions.Options;
 
