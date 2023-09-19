@@ -1,5 +1,6 @@
 using CloudWeather.Report.Config;
 using CloudWeather.Report.DataAccess;
+using CloudWeather.Temperature.DataAccess;
 using Microsoft.Extensions.Options;
 
 namespace CloudWeather.Report.BusinessLogic;
@@ -35,7 +36,20 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         _config = config.Value;
     }
 
-    public Task<WeatherReport> BuildWeeklyReport(string zip, int days)
+    public async Task<WeatherReport> BuildWeeklyReport(string zip, int days)
+    {
+        var httpClient = _http.CreateClient();
+
+        var precipData = await FetchPrecipitationData(httpClient, zip, days);
+        var tempData = await FetchTemperatureData(httpClient, zip, days);
+    }
+
+    private async Task<List<TemperatureModel>> FetchTemperatureData(HttpClient httpClient, string zip, int days)
+    {
+        throw new NotImplementedException();
+    }
+
+    private async Task FetchPrecipitationData(HttpClient httpClient, string zip, int days)
     {
         throw new NotImplementedException();
     }
