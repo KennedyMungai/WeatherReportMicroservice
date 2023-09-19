@@ -16,7 +16,7 @@ public class TemperatureController : ControllerBase
     }
 
     [HttpGet("/observation/{zipCode}")]
-    public async Task<IActionResult> GetTemperatureByZipCode(string zipCode, int? days)
+    public async Task<IActionResult> GetTemperatureByZipCode(string zipCode, [FromQuery] int? days)
     {
         if (days is null || days < 1 || days > 30)
         {
