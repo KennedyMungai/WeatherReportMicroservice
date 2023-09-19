@@ -14,7 +14,7 @@ public interface IWeatherReportAggregator
     /// <param name="zip">The zip code for the area for which the weather report is needed</param>
     /// <param name="days">Th number of days for which the weather report is needed</param>
     /// <returns>A weather report</returns>
-    Task<WeatherReport> BuildWeeklyReport(string zip, int days);
+    Task<ReportsModel> BuildWeeklyReport(string zip, int days);
 }
 
 public class WeatherReportAggregator : IWeatherReportAggregator
@@ -37,7 +37,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         _config = config.Value;
     }
 
-    public async Task<WeatherReport> BuildWeeklyReport(string zip, int days)
+    public async Task<ReportsModel> BuildWeeklyReport(string zip, int days)
     {
         var httpClient = _http.CreateClient();
 
@@ -57,7 +57,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
             $"average high temp: {averageHighTemp} degrees, average low temp: {averageLowTemp} degrees"
         );
 
-        var weeklyWeatherReport = new WeatherReport
+        var weeklyWeatherReport = new ReportsModel
         {
             AverageHighF = Math.Round(averageHighTemp, 1),
             AverageLowF = Math.Round(averageLowTemp, 1),
@@ -66,6 +66,8 @@ public class WeatherReportAggregator : IWeatherReportAggregator
             ZipCode = zip,
             CreatedOn = DateTime.UtcNow
         };
+
+        await _context.Reports.AddAsync(weeklyWeatherReport);
 
         return weeklyWeatherReport;
     }
