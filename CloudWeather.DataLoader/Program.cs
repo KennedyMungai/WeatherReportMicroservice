@@ -53,7 +53,7 @@ internal class Program
         }
     }
 
-    private void PostPrecip(int lowTemp, string zip, DateTime day, HttpClient precipitationHttpClient)
+    private static void PostPrecip(int lowTemp, string zip, DateTime day, HttpClient precipitationHttpClient)
     {
         Random rand = new();
         var isPrecip = rand.Next(2) < 1;
@@ -111,7 +111,7 @@ internal class Program
         }
     }
 
-    private List<int> PostTemp(string zip, DateTime day, HttpClient temperatureHttpClient)
+    private static List<int> PostTemp(string zip, DateTime day, HttpClient temperatureHttpClient)
     {
         throw new NotImplementedException();
     }
