@@ -1,4 +1,5 @@
 using CloudWeather.Temperature.DataAccess;
+using CloudWeather.Temperature.Services.TemperatureService;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<TempDbContext>(options =>
         ServerVersion.Parse("8.0.23-mysql")
     );
 });
+builder.Services.AddScoped<ITemperatureService, TemperatureService>();
 
 var app = builder.Build();
 
