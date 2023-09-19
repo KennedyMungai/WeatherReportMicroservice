@@ -14,7 +14,7 @@ public interface IWeatherReportAggregator
     /// <param name="zip">The zip code for the area for which the weather report is needed</param>
     /// <param name="days">Th number of days for which the weather report is needed</param>
     /// <returns>A weather report</returns>
-    Task<ReportsModel> BuildWeeklyReport(string zip, int days);
+    Task<ReportsModel> BuildWeeklyReport(string zip, int? days);
 }
 
 public class WeatherReportAggregator : IWeatherReportAggregator
@@ -37,7 +37,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         _config = config.Value;
     }
 
-    public async Task<ReportsModel> BuildWeeklyReport(string zip, int days)
+    public async Task<ReportsModel> BuildWeeklyReport(string zip, int? days)
     {
         var httpClient = _http.CreateClient();
 
@@ -90,7 +90,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         return Math.Round(totalSnow, 1);
     }
 
-    private async Task<List<TemperatureModel>> FetchTemperatureData(HttpClient httpClient, string zip, int days)
+    private async Task<List<TemperatureModel>> FetchTemperatureData(HttpClient httpClient, string zip, int? days)
     {
 
         var endpoint = BuildTemperatureServiceEndpoint(zip, days);
@@ -102,7 +102,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         return temperatureData ?? new List<TemperatureModel>();
     }
 
-    private string BuildTemperatureServiceEndpoint(string zip, int days)
+    private string BuildTemperatureServiceEndpoint(string zip, int? days)
     {
         var tempServiceProtocol = _config.TempDataProtocol;
         var tempServiceHost = _config.TempDataHost;
@@ -111,7 +111,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         return $"{tempServiceProtocol}://{tempServiceHost}:{tempServicePort}/observation/{zip}?days={days}";
     }
 
-    private string BuildPrecipitationServiceEndpoint(string zip, int days)
+    private string BuildPrecipitationServiceEndpoint(string zip, int? days)
     {
         var precipServiceProtocol = _config.PrecipDataProtocol;
         var precipServiceHost = _config.PrecipDataHost;
@@ -120,7 +120,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         return $"{precipServiceProtocol}://{precipServiceHost}:{precipServicePort}/observation/{zip}?days={days}";
     }
 
-    private async Task<List<PrecipitationModel>> FetchPrecipitationData(HttpClient httpClient, string zip, int days)
+    private async Task<List<PrecipitationModel>> FetchPrecipitationData(HttpClient httpClient, string zip, int? days)
     {
         var endpoint = BuildPrecipitationServiceEndpoint(zip, days);
         var precipRecords = await httpClient.GetAsync(endpoint);
