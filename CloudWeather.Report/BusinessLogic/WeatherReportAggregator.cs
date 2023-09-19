@@ -68,6 +68,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         };
 
         await _context.Reports.AddAsync(weeklyWeatherReport);
+        await _context.SaveChangesAsync();
 
         return weeklyWeatherReport;
     }
