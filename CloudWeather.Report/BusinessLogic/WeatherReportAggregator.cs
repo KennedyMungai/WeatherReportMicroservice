@@ -44,6 +44,10 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         var precipData = await FetchPrecipitationData(httpClient, zip, days);
         var totalSnow = GetTotalSnow(precipData);
         var totalRain = GetTotalRain(precipData);
+        _logger.LogInformation(
+            $"zip: {zip} over last {days} days" +
+            $"total snow: {totalSnow} inches, rain: {totalRain} inches"
+        );
 
         var tempData = await FetchTemperatureData(httpClient, zip, days);
     }
