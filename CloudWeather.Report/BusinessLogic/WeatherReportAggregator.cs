@@ -49,7 +49,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         throw new NotImplementedException();
     }
 
-    private async Task FetchPrecipitationData(HttpClient httpClient, string zip, int days)
+    private async Task<List<PrecipitationModel>> FetchPrecipitationData(HttpClient httpClient, string zip, int days)
     {
         throw new NotImplementedException();
     }
