@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using CloudWeather.Temperature.DataAccess;
 using CloudWeather.Temperature.Services.TemperatureService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,5 +33,23 @@ public class TemperatureController : ControllerBase
         }
 
         return await Task.FromResult(Ok(results));
+    }
+
+    [HttpPost("/observation")]
+    public async Task<IActionResult> RecordTemperature([FromBody] TemperatureModel temperature)
+    {
+        if (temperature is null)
+        {
+            return BadRequest("The temperature value was found to be null");
+        }
+
+        var isSuccessful = await _temperatureService.WriteTemperatureData(temperature);
+
+        if (isSuccessful is false)
+        {
+            return await Task.FromResult(BadRequest("The temperature value was not recorded"));
+        }
+
+        return await Task.FromResult(Ok());
     }
 }
