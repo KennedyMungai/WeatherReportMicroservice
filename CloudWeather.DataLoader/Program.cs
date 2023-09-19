@@ -23,3 +23,5 @@ List<string> zipCodes = new()
     "32808",
     "19717"
 };
+
+Console.WriteLine("Starting the data load");
