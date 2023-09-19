@@ -45,11 +45,17 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         var totalSnow = GetTotalSnow(precipData);
         var totalRain = GetTotalRain(precipData);
         _logger.LogInformation(
-            $"zip: {zip} over last {days} days" +
+            $"zip: {zip} over last {days} days:" +
             $"total snow: {totalSnow} inches, rain: {totalRain} inches"
         );
 
         var tempData = await FetchTemperatureData(httpClient, zip, days);
+        var averageHighTemp = tempData.Average(t => t.TempHighF);
+        var averageLowTemp = tempData.Average(t => t.TempLowF);
+        _logger.LogInformation(
+            $"zip: {zip} over the last {days} days:" +
+            $"average high temp: {averageHighTemp} degrees, average low temp: {averageLowTemp} degrees"
+        );
     }
 
     private static decimal GetTotalRain(List<PrecipitationModel> precipData)
