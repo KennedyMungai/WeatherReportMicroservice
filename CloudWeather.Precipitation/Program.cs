@@ -14,7 +14,7 @@ builder.Services.AddDbContext<PrecipDbContext>(options =>
 {
     options.UseMySql(
         builder.Configuration.GetConnectionString("DefaultConnString"),
-        ServerVersion.Parse("8.0.23-mysql")
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnString"))
     );
 });
 builder.Services.AddScoped<IPrecipitationService, PrecipitationService>();
