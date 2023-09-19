@@ -111,8 +111,46 @@ internal class Program
         }
     }
 
-    private static List<int> PostTemp(string zip, DateTime day, HttpClient temperatureHttpClient)
+    private static List<int> PostTemp(string zip, DateTime day, HttpClient httpClient)
     {
-        throw new NotImplementedException();
+        Random rand = new();
+
+        var t1 = rand.Next(0, 100);
+        var t2 = rand.Next(0, 100);
+
+        List<int> hiLoTemps = new()
+        {
+            t1,t2
+        };
+
+        hiLoTemps.Sort();
+
+        TemperatureModel temperatureObservation = new()
+        {
+            TempLowF = hiLoTemps[0],
+            TempHighF = hiLoTemps[1],
+            ZipCode = zip,
+            CreatedOn = day
+        };
+
+        var tempResponse = httpClient
+                                .PostAsJsonAsync("observation", temperatureObservation)
+                                .Result;
+
+        if (tempResponse.IsSuccessStatusCode)
+        {
+            Console.Write(
+                $"Posted Temperature: Date: {day:d}" +
+                $"Zip: {zip}" +
+                $"Low: {temperatureObservation.TempLowF}" +
+                $"High: {temperatureObservation.TempHighF}"
+            );
+        }
+        else
+        {
+            Console.WriteLine(tempResponse.ToString());
+        }
+
+        return hiLoTemps;
     }
 }
