@@ -25,3 +25,9 @@ List<string> zipCodes = new()
 };
 
 Console.WriteLine("Starting the data load");
+
+var temperatureHttpClient = new HttpClient();
+temperatureHttpClient.BaseAddress = new Uri($"http://{tempServiceHost}:{tempServicePort}");
+
+var precipitationHttpClient = new HttpClient();
+precipitationHttpClient.BaseAddress = new Uri($"http://{precipServiceHost}:{precipServicePort}");
