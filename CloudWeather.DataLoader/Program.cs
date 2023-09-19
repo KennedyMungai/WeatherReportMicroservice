@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.Extensions.Configuration;
 
 IConfiguration config = new ConfigurationBuilder()
                             .AddJsonFile("appsettings.json")
@@ -31,3 +32,16 @@ temperatureHttpClient.BaseAddress = new Uri($"http://{tempServiceHost}:{tempServ
 
 var precipitationHttpClient = new HttpClient();
 precipitationHttpClient.BaseAddress = new Uri($"http://{precipServiceHost}:{precipServicePort}");
+
+foreach (var zip in zipCodes)
+{
+    Console.WriteLine($"Loading data for zip code {zip}");
+    var from = DateTime.Now.AddYears(-2);
+    var thru = DateTime.Now;
+
+    for (var day = from.Date; day.Date <= thru.Date; day = day.AddDays(1))
+    {
+        var temps = PostTemp(zip, day, temperatureHttpClient);
+        PostPrecip(temps[0], zip, day, precipitationHttpClient);
+    }
+}
