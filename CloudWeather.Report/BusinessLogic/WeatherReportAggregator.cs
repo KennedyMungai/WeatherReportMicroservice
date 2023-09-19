@@ -56,6 +56,15 @@ public class WeatherReportAggregator : IWeatherReportAggregator
         return temperatureData ?? new List<TemperatureModel>();
     }
 
+    private string? BuildTemperatureServiceEndpoint(string zip, int days)
+    {
+        var tempServiceProtocol = _config.TempDataProtocol;
+        var tempServiceHost = _config.TempDataHost;
+        var tempServicePort = _config.TempDataPort;
+
+        return $"{tempServiceProtocol}://{tempServiceHost}:{tempServicePort}/observation/{zip}?days={days}";
+    }
+
     private async Task<List<PrecipitationModel>> FetchPrecipitationData(HttpClient httpClient, string zip, int days)
     {
         throw new NotImplementedException();
