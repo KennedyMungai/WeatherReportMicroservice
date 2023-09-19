@@ -18,6 +18,9 @@ public class TemperatureController : ControllerBase
     }
 
     [HttpGet("/observation/{zipCode}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetTemperatureByZipCode(string zipCode, [FromQuery] int? days)
     {
         if (days is null || days < 1 || days > 30)
@@ -36,11 +39,13 @@ public class TemperatureController : ControllerBase
     }
 
     [HttpPost("/observation")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> RecordTemperature([FromBody] TemperatureModel temperature)
     {
         if (temperature is null)
         {
-            return BadRequest("The temperature value was found to be null");
+            return await Task.FromResult(BadRequest("The temperature value was found to be null"));
         }
 
         var isSuccessful = await _temperatureService.WriteTemperatureData(temperature);
