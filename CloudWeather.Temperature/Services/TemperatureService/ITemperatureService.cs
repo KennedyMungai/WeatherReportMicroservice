@@ -6,4 +6,5 @@ namespace CloudWeather.Temperature.Services.TemperatureService;
 public interface ITemperatureService
 {
     Task<IEnumerable<TemperatureModel>> GetTemperatureData(string zip, int? days);
+    Task<bool> WriteTemperatureData(TemperatureModel temperature);
 }
