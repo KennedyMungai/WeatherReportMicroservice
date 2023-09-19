@@ -1,4 +1,5 @@
 using CloudWeather.Precipitation.DataAccess;
+using CloudWeather.Precipitation.Services.PrecipitationServices;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ builder.Services.AddDbContext<PrecipDbContext>(options =>
         ServerVersion.Parse("8.0.23-mysql")
     );
 });
+builder.Services.AddScoped<IPrecipitationService, PrecipitationService>();
 
 var app = builder.Build();
 
