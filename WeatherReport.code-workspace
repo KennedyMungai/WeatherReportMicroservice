@@ -5,6 +5,6 @@
 		}
 	],
 	"settings": {
-		"cSpell.words": ["ASPNETCORE", "Precip"]
+		"cSpell.words": ["appsettings", "ASPNETCORE", "Precip"]
 	}
 }
