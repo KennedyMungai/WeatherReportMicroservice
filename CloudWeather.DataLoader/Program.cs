@@ -8,7 +8,7 @@ internal class Program
     private static void Main(string[] args)
     {
         IConfiguration config = new ConfigurationBuilder()
-                            .AddJsonFile("appsettings.json")
+                            .AddJsonFile("appSettings.json")
                             .AddEnvironmentVariables()
                             .Build();
 
