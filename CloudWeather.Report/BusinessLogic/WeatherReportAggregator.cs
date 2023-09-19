@@ -57,7 +57,7 @@ public class WeatherReportAggregator : IWeatherReportAggregator
             $"average high temp: {averageHighTemp} degrees, average low temp: {averageLowTemp} degrees"
         );
 
-        var weeklyWeatherReport = new ReportsModel
+        var weatherReport = new ReportsModel
         {
             AverageHighF = Math.Round(averageHighTemp, 1),
             AverageLowF = Math.Round(averageLowTemp, 1),
@@ -67,10 +67,10 @@ public class WeatherReportAggregator : IWeatherReportAggregator
             CreatedOn = DateTime.UtcNow
         };
 
-        await _context.Reports.AddAsync(weeklyWeatherReport);
+        await _context.Reports.AddAsync(weatherReport);
         await _context.SaveChangesAsync();
 
-        return weeklyWeatherReport;
+        return weatherReport;
     }
 
     private static decimal GetTotalRain(List<PrecipitationModel> precipData)
