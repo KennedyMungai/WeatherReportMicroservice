@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using CloudWeather.Temperature.Services.TemperatureService;
 using Microsoft.AspNetCore.Mvc;
 
