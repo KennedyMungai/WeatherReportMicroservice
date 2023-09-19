@@ -56,6 +56,18 @@ public class WeatherReportAggregator : IWeatherReportAggregator
             $"zip: {zip} over the last {days} days:" +
             $"average high temp: {averageHighTemp} degrees, average low temp: {averageLowTemp} degrees"
         );
+
+        var weeklyWeatherReport = new WeatherReport
+        {
+            AverageHighF = Math.Round(averageHighTemp, 1),
+            AverageLowF = Math.Round(averageLowTemp, 1),
+            RainfallTotalInches = totalRain,
+            SnowTotalInches = totalSnow,
+            ZipCode = zip,
+            CreatedOn = DateTime.UtcNow
+        };
+
+        return weeklyWeatherReport;
     }
 
     private static decimal GetTotalRain(List<PrecipitationModel> precipData)
