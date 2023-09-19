@@ -1,3 +1,4 @@
+using System.Text.Json;
 using CloudWeather.Report.Config;
 using CloudWeather.Report.DataAccess;
 using CloudWeather.Report.Models;
@@ -76,6 +77,17 @@ public class WeatherReportAggregator : IWeatherReportAggregator
 
     private async Task<List<PrecipitationModel>> FetchPrecipitationData(HttpClient httpClient, string zip, int days)
     {
-        throw new NotImplementedException();
+        var endpoint = BuildPrecipitationServiceEndpoint(zip, days);
+        var precipRecords = await httpClient.GetAsync(endpoint);
+        var jsonSerializerOptions = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        var precipData = await precipRecords
+                                .Content
+                                .ReadFromJsonAsync<List<PrecipitationModel>>(jsonSerializerOptions);
+
+        return precipData ?? new List<PrecipitationModel>();
     }
 }
