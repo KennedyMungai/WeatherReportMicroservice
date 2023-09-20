@@ -2,7 +2,7 @@
 
 set -e
 
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 092376285579.dkr.ecr.us-east-1.amazonaws.com 
+aws ecr get-login-password --region us-east-1 --profile ecr_access_for_docker_images | docker login --username AWS --password-stdin 092376285579.dkr.ecr.us-east-1.amazonaws.com 
 
 docker build -f ./Dockerfile-WeatherReport ./CloudWeather.Report -t cloudweather-report:latest
 
